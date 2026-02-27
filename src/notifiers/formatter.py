@@ -30,6 +30,32 @@ class MarkdownFormatter:
         if not papers:
             return self._format_empty_digest()
 
+        # 企业微信Markdown消息长度限制
+        MAX_LENGTH = 4096
+
+        # 尝试不同的论文数量，直到消息长度符合要求
+        for num_papers in range(len(papers), 0, -1):
+            message = self._build_message(papers[:num_papers])
+
+            if len(message) <= MAX_LENGTH:
+                if num_papers < len(papers):
+                    logger.warning(f"⚠️  消息过长，已自动调整为推送 {num_papers}/{len(papers)} 篇论文")
+                return message
+
+        # 如果连1篇都超长，返回简化版本
+        logger.error("❌ 消息太长，无法推送任何论文")
+        return self._format_empty_digest()
+
+    def _build_message(self, papers: List[Paper]) -> str:
+        """
+        构建消息内容
+
+        Args:
+            papers: 论文列表
+
+        Returns:
+            Markdown消息
+        """
         # 标题
         today = datetime.now().strftime("%Y-%m-%d")
         weekday = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"][datetime.now().weekday()]
