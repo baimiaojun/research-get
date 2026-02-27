@@ -163,6 +163,22 @@ def test_wecom():
         print("   ❌ WECOM_WEBHOOK_URL 未配置")
         return False
 
+    # 清理URL中的空格和换行符
+    webhook = webhook.strip()
+
+    # 显示URL用于调试（隐藏key部分）
+    if 'key=' in webhook:
+        key_part = webhook.split('key=')[1].split('&')[0]
+        masked_url = webhook.replace(key_part, f"{key_part[:10]}...{key_part[-10:]}")
+        print(f"   🔗 Webhook: {masked_url}")
+
+    # 验证URL格式
+    if not webhook.startswith('https://qyapi.weixin.qq.com/'):
+        print("   ⚠️  URL格式可能不正确")
+        print(f"   当前URL开头: {webhook[:30]}...")
+        print("   应该以 https://qyapi.weixin.qq.com/ 开头")
+        return False
+
     try:
         return asyncio.run(test_wecom_async(webhook))
     except Exception as e:

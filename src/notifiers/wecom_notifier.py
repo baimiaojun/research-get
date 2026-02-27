@@ -26,8 +26,16 @@ class WeComNotifier:
         Args:
             webhook_url: 企业微信Webhook URL
         """
-        self.webhook_url = webhook_url
+        # 清理URL中的空格和换行符
+        self.webhook_url = webhook_url.strip()
+
+        # 验证URL格式
+        if not self.webhook_url.startswith('https://qyapi.weixin.qq.com/'):
+            logger.warning(f"⚠️  Webhook URL格式可能不正确: {self.webhook_url[:50]}...")
+            logger.warning("标准格式应为: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=...")
+
         logger.info("企业微信通知器已初始化")
+        logger.debug(f"Webhook URL长度: {len(self.webhook_url)} 字符")
 
     @retry(
         stop=stop_after_attempt(3),
