@@ -25,7 +25,9 @@ jobs:
 
       - name: ✅ 运行配置检查
         env:
+          AI_SERVICE: ${{ secrets.AI_SERVICE }}
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           WECOM_WEBHOOK_URL: ${{ secrets.WECOM_WEBHOOK_URL }}
         run: |
           python check_setup.py
