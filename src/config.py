@@ -89,13 +89,22 @@ class Config(BaseSettings):
             raise ValueError(f"日志级别必须是: {', '.join(valid_levels)}")
         return v_upper
 
-    @field_validator("papers_to_send")
+    @field_validator("papers_to_send", mode="before")
     @classmethod
-    def validate_papers_count(cls, v: int) -> int:
-        """验证论文数量"""
-        if v < 1 or v > 20:
+    def validate_papers_count(cls, v) -> int:
+        """验证论文数量（处理空字符串）"""
+        # 处理空字符串或None，使用默认值
+        if v is None or v == "":
+            return 6
+        # 转换为整数
+        try:
+            v_int = int(v)
+        except (ValueError, TypeError):
+            return 6
+        # 验证范围
+        if v_int < 1 or v_int > 20:
             raise ValueError("每日推送论文数量应在1-20之间")
-        return v
+        return v_int
 
     class Config:
         """pydantic配置"""

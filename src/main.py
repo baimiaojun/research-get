@@ -17,6 +17,8 @@ from src.notifiers.wecom_notifier import WeComNotifier
 
 async def main():
     """主流程"""
+    logger = None  # 初始化为None，避免未定义错误
+
     try:
         # 1. 加载配置
         print("=" * 60)
@@ -233,7 +235,12 @@ async def main():
         print("\n\n⚠️  用户中断")
         sys.exit(1)
     except Exception as e:
-        logger.exception(f"❌ 系统错误: {e}")
+        if logger:
+            logger.exception(f"❌ 系统错误: {e}")
+        else:
+            print(f"\n❌ 配置加载失败: {e}")
+            import traceback
+            traceback.print_exc()
         sys.exit(1)
 
 
