@@ -120,7 +120,13 @@ def test_ai_service():
 
 async def test_wecom_async(webhook):
     """异步测试企业微信"""
-    import aiohttp
+    try:
+        import aiohttp
+    except ImportError:
+        print("   ⚠️  正在安装aiohttp...")
+        import subprocess
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'aiohttp', '-q'])
+        import aiohttp
 
     payload = {
         "msgtype": "text",
