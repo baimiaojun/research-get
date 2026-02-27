@@ -1,0 +1,99 @@
+# 领域关键词配置
+# 用于筛选和评分相关论文
+
+domains:
+  # 统计学领域
+  statistics:
+    must_have:
+      - statistical learning
+      - bayesian
+      - causal inference
+      - time series
+      - hypothesis testing
+      - statistical inference
+    boost:
+      - regression
+      - probability
+      - sampling
+      - variance
+      - estimation
+
+  # 机器学习领域
+  machine_learning:
+    must_have:
+      - machine learning
+      - supervised learning
+      - unsupervised learning
+      - reinforcement learning
+      - transfer learning
+      - meta-learning
+      - semi-supervised
+      - active learning
+    boost:
+      - classification
+      - clustering
+      - feature selection
+      - dimensionality reduction
+      - ensemble
+      - boosting
+      - random forest
+
+  # 深度学习领域
+  deep_learning:
+    must_have:
+      - neural network
+      - deep learning
+      - transformer
+      - attention mechanism
+      - diffusion model
+      - convolutional
+      - recurrent
+    boost:
+      - CNN
+      - RNN
+      - LSTM
+      - GAN
+      - VAE
+      - ResNet
+      - BERT
+      - GPT
+
+  # AI应用领域
+  ai_applications:
+    must_have:
+      - natural language processing
+      - computer vision
+      - large language model
+      - multimodal
+      - speech recognition
+      - image generation
+      - video understanding
+    boost:
+      - LLM
+      - GPT
+      - BERT
+      - vision transformer
+      - object detection
+      - segmentation
+      - NLP
+      - CV
+
+# 排除关键词（包含这些词的论文会被过滤掉）
+exclude:
+  - medical imaging
+  - drug discovery
+  - protein folding
+  - genomics
+  - DNA
+  - clinical trial
+  - pharmaceutical
+  - radiology
+  - pathology
+
+# 评分权重配置
+weights:
+  title_match: 10        # 标题包含must_have关键词
+  abstract_match: 5      # 摘要包含must_have关键词
+  boost_keyword: 2       # 包含boost关键词
+  huggingface_source: 3  # 来自Hugging Face（精选论文）
+  paperswithcode: 2      # 来自Papers with Code（有代码实现）

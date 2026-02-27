@@ -1,0 +1,66 @@
+name: 🔍 检查配置
+
+on:
+  # 仅支持手动触发
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 📥 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 🐍 配置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 安装依赖
+        run: |
+          pip install --upgrade pip
+          pip install anthropic requests
+
+      - name: ✅ 运行配置检查
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          WECOM_WEBHOOK_URL: ${{ secrets.WECOM_WEBHOOK_URL }}
+        run: |
+          python check_setup.py
+
+      - name: 🎉 配置成功提示
+        if: success()
+        run: |
+          echo "=============================="
+          echo "✅ 恭喜！所有配置都正确！"
+          echo "=============================="
+          echo ""
+          echo "📅 系统将在每天早上8:00自动推送学术资讯"
+          echo "📱 请检查企业微信群是否收到测试消息"
+          echo ""
+          echo "💡 下一步："
+          echo "  1. 运行 'Daily Academic Digest' 工作流测试完整推送"
+          echo "  2. 编辑 config/keywords.yml 自定义关注领域"
+          echo "  3. 查看 README.md 了解更多功能"
+          echo ""
+
+      - name: ⚠️ 配置失败提示
+        if: failure()
+        run: |
+          echo "=============================="
+          echo "⚠️  配置检查失败"
+          echo "=============================="
+          echo ""
+          echo "请查看上方日志了解详细错误信息"
+          echo ""
+          echo "💡 常见问题："
+          echo "  1. 检查 Secrets 名称是否完全正确（区分大小写）"
+          echo "  2. 检查 API Key 是否以 'sk-ant-' 开头"
+          echo "  3. 检查 Webhook URL 是否以 'https://qyapi.weixin.qq.com/' 开头"
+          echo ""
+          echo "📖 需要帮助？查看："
+          echo "  - SETUP_TUTORIAL.md - 详细教程"
+          echo "  - docs/faq.md - 常见问题"
+          echo ""
