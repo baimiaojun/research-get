@@ -194,7 +194,14 @@ async def main():
 
         markdown_message = formatter.format_digest(selected_papers)
 
-        logger.info(f"消息长度: {len(markdown_message)} 字符")
+        message_chars = len(markdown_message)
+        message_bytes = len(markdown_message.encode('utf-8'))
+        logger.info(f"消息长度: {message_chars} 字符 ({message_bytes} 字节)")
+
+        if message_bytes > 4096:
+            logger.error(f"⚠️  警告: 消息仍超过4096字节限制！")
+        else:
+            logger.info(f"✅ 消息长度符合要求（< 4096字节）")
 
         # 10. 推送到企业微信
         logger.info("")

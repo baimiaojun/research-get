@@ -30,16 +30,18 @@ class MarkdownFormatter:
         if not papers:
             return self._format_empty_digest()
 
-        # 企业微信Markdown消息长度限制
-        MAX_LENGTH = 4096
+        # 企业微信Markdown消息长度限制（字节数，不是字符数！）
+        MAX_BYTES = 4096
 
         # 尝试不同的论文数量，直到消息长度符合要求
         for num_papers in range(len(papers), 0, -1):
             message = self._build_message(papers[:num_papers])
+            message_bytes = len(message.encode('utf-8'))
 
-            if len(message) <= MAX_LENGTH:
+            if message_bytes <= MAX_BYTES:
                 if num_papers < len(papers):
                     logger.warning(f"⚠️  消息过长，已自动调整为推送 {num_papers}/{len(papers)} 篇论文")
+                logger.info(f"最终消息: {len(message)} 字符, {message_bytes} 字节")
                 return message
 
         # 如果连1篇都超长，返回简化版本
