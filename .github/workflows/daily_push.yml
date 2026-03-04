@@ -1,9 +1,10 @@
 name: Daily Academic Digest
 
 on:
-  # 定时任务：每天UTC 00:00运行（北京时间 08:00）
+  # 定时任务：每天UTC 06:00运行（北京时间 14:00）
+  # arXiv在美东时间20:00(UTC次日00:00)更新，所以UTC 06:00能确保获取到新论文
   schedule:
-    - cron: '0 0 * * *'  # UTC 00:00 = 北京时间 08:00
+    - cron: '0 6 * * *'  # UTC 06:00 = 北京时间 14:00
 
   # 支持手动触发
   workflow_dispatch:
