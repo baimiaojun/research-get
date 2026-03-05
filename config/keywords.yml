@@ -2,21 +2,28 @@
 # 用于筛选和评分相关论文
 
 domains:
-  # 统计学领域
-  statistics:
+  # 信贷风控领域
+  credit_risk:
     must_have:
-      - statistical learning
-      - bayesian
-      - causal inference
-      - time series
-      - hypothesis testing
-      - statistical inference
+      - credit risk
+      - credit scoring
+      - default prediction
+      - loan default
+      - credit assessment
+      - risk modeling
+      - financial risk
+      - credit evaluation
     boost:
-      - regression
-      - probability
-      - sampling
-      - variance
-      - estimation
+      - fraud detection
+      - risk management
+      - bankruptcy prediction
+      - credit rating
+      - lending
+      - delinquency
+      - probability of default
+      - loss given default
+      - exposure at default
+      - scorecard
 
   # 机器学习领域
   machine_learning:
@@ -29,6 +36,8 @@ domains:
       - meta-learning
       - semi-supervised
       - active learning
+      - neural network
+      - deep learning
     boost:
       - classification
       - clustering
@@ -37,46 +46,11 @@ domains:
       - ensemble
       - boosting
       - random forest
-
-  # 深度学习领域
-  deep_learning:
-    must_have:
-      - neural network
-      - deep learning
+      - gradient boosting
+      - XGBoost
+      - LightGBM
       - transformer
       - attention mechanism
-      - diffusion model
-      - convolutional
-      - recurrent
-    boost:
-      - CNN
-      - RNN
-      - LSTM
-      - GAN
-      - VAE
-      - ResNet
-      - BERT
-      - GPT
-
-  # AI应用领域
-  ai_applications:
-    must_have:
-      - natural language processing
-      - computer vision
-      - large language model
-      - multimodal
-      - speech recognition
-      - image generation
-      - video understanding
-    boost:
-      - LLM
-      - GPT
-      - BERT
-      - vision transformer
-      - object detection
-      - segmentation
-      - NLP
-      - CV
 
 # 排除关键词（包含这些词的论文会被过滤掉）
 exclude:
@@ -89,6 +63,10 @@ exclude:
   - pharmaceutical
   - radiology
   - pathology
+  - quantum computing
+  - quantum machine learning
+  - robotics
+  - autonomous driving
 
 # 评分权重配置
 weights:
