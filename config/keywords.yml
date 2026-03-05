@@ -2,7 +2,7 @@
 # 用于筛选和评分相关论文
 
 domains:
-  # 信贷风控领域
+  # 信贷风控和金融风险领域
   credit_risk:
     must_have:
       - credit risk
@@ -13,9 +13,12 @@ domains:
       - risk modeling
       - financial risk
       - credit evaluation
+      - risk management
+      - financial modeling
+      - quantitative finance
+      - risk assessment
     boost:
       - fraud detection
-      - risk management
       - bankruptcy prediction
       - credit rating
       - lending
@@ -24,6 +27,11 @@ domains:
       - loss given default
       - exposure at default
       - scorecard
+      - anti money laundering
+      - aml
+      - regulatory
+      - compliance
+      - financial prediction
 
   # 机器学习领域
   machine_learning:
