@@ -24,14 +24,16 @@ class ArxivFetcher(BaseFetcher):
         super().__init__("arxiv")
         self.max_results = max_results
 
-        # arXiv分类（机器学习和AI相关）
+        # arXiv分类（机器学习和信贷风控相关）
         self.categories = [
             "cs.LG",  # Machine Learning
             "cs.AI",  # Artificial Intelligence
             "stat.ML",  # Machine Learning (Statistics)
-            "cs.CV",  # Computer Vision
-            "cs.CL",  # Computation and Language (NLP)
-            "cs.NE",  # Neural and Evolutionary Computing
+            "q-fin.RM",  # Quantitative Finance - Risk Management
+            "q-fin.ST",  # Quantitative Finance - Statistical Finance
+            "q-fin.CP",  # Quantitative Finance - Computational Finance
+            "stat.AP",  # Statistics - Applications
+            "econ.EM",  # Economics - Econometrics
         ]
 
     async def fetch_papers(self, days: int = 1) -> List[Paper]:
