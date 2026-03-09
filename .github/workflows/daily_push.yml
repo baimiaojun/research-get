@@ -36,6 +36,8 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           WECOM_WEBHOOK_URL: ${{ secrets.WECOM_WEBHOOK_URL }}
           PAPERS_TO_SEND: ${{ secrets.PAPERS_TO_SEND }}
+          FETCH_DAYS: ${{ secrets.FETCH_DAYS }}
+          ARXIV_MAX_RESULTS: ${{ secrets.ARXIV_MAX_RESULTS }}
         run: |
           python -m src.main
 
