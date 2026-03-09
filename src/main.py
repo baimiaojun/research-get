@@ -154,7 +154,7 @@ async def main():
         scored_papers = keyword_filter.get_top_papers(
             unpushed_papers,
             count=config.papers_to_send,
-            min_score=0.0,  # 不设置最低分数，确保能选出论文
+            min_score=5.0,  # 设置最低分数5分，只推送质量较好的论文
         )
 
         if not scored_papers:
