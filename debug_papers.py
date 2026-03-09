@@ -20,7 +20,7 @@ async def main():
     ]
 
     # 构建查询
-    cutoff_date = datetime.now() - timedelta(days=2)
+    cutoff_date = datetime.now() - timedelta(days=30)
     category_query = " OR ".join([f"cat:{cat}" for cat in categories])
     query = f"({category_query})"
 
@@ -31,7 +31,7 @@ async def main():
     client = arxiv.Client()
     search = arxiv.Search(
         query=query,
-        max_results=50,
+        max_results=200,
         sort_by=arxiv.SortCriterion.SubmittedDate,
         sort_order=arxiv.SortOrder.Descending,
     )
